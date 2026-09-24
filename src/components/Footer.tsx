@@ -18,7 +18,7 @@ export default function Footer() {
               />
             </Link>
             <p>
-              Trust infrastructure for modern teams &mdash; background verification, cookie
+              Trust infrastructure for modern teams - background verification, cookie
               &amp; privacy compliance, and enterprise architecture diagrams, delivered as a
               service.
             </p>

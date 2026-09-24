@@ -39,9 +39,9 @@ const infoCards: { icon: IconName; title: string; lines: string[] }[] = [
 
 const faqs = [
   { q: "How fast can we get started?", a: "Most clients complete onboarding and submit their first request within a day of the initial call." },
-  { q: "Can we bundle multiple services?", a: "Yes &mdash; many clients combine BGV with cookie compliance or architecture documentation under one contract." },
+  { q: "Can we bundle multiple services?", a: "Yes - many clients combine BGV with cookie compliance or architecture documentation under one contract." },
   { q: "Do you support international teams?", a: "Background checks and compliance mapping are available across 40+ countries; diagram services are fully remote." },
-  { q: "Is there a minimum contract length?", a: "No &mdash; Basic and Starter plans are pay-as-you-go. Enterprise plans include custom terms." },
+  { q: "Is there a minimum contract length?", a: "No - Basic and Starter plans are pay-as-you-go. Enterprise plans include custom terms." },
 ];
 
 export default function ContactPage() {
@@ -56,8 +56,8 @@ export default function ContactPage() {
           <Eyebrow>Contact Us</Eyebrow>
           <h1 style={{ maxWidth: 680 }}>Let&apos;s scope your first engagement.</h1>
           <p className="lead" style={{ maxWidth: 640 }}>
-            Tell us which service you need &mdash; background verification, cookie compliance,
-            or architecture diagrams &mdash; and a specialist will follow up within one business
+            Tell us which service you need - background verification, cookie compliance,
+            or architecture diagrams - and a specialist will follow up within one business
             day.
           </p>
         </div>

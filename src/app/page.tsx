@@ -11,10 +11,10 @@ export default function HomePage() {
             <div className="hero-badge">
               <Icon name="Sparkles" /> Trusted by 120+ growing teams
             </div>
-            <h1>Trust, Compliance &amp; Clarity &mdash; delivered as a service.</h1>
+            <h1>Trust, Compliance &amp; Clarity - delivered as a service.</h1>
             <p className="lead">
               Relynt helps you hire with confidence, stay compliant with global privacy law,
-              and communicate your systems clearly &mdash; through background verification,
+              and communicate your systems clearly - through background verification,
               cookie &amp; consent compliance, and enterprise architecture diagrams.
             </p>
             <div className="hero-actions">
@@ -124,7 +124,7 @@ export default function HomePage() {
             center
             eyebrow="What we do"
             title="Three services. One trusted partner."
-            lead="Whatever stage you're at &mdash; hiring, scaling, or shipping &mdash; Relynt gives you the verification, compliance and documentation infrastructure to move faster with confidence."
+            lead="Whatever stage you're at - hiring, scaling, or shipping - Relynt gives you the verification, compliance and documentation infrastructure to move faster with confidence."
           />
           <div className="grid grid-3">
             <div className="card">
@@ -133,7 +133,7 @@ export default function HomePage() {
               </div>
               <h3>Background Verification</h3>
               <p>
-                Employment, education, identity, address and criminal record checks &mdash;
+                Employment, education, identity, address and criminal record checks -
                 automated where possible, human-reviewed where it matters. Reports in as little
                 as 48 hours.
               </p>
@@ -145,27 +145,28 @@ export default function HomePage() {
               <div className="icon-tile">
                 <Icon name="Cookie" />
               </div>
-              <h3>Cookie &amp; Consent Compliance</h3>
+              <h3>EU Compliance</h3>
               <p>
                 Cookie scanning, consent management platforms, and policy generation mapped to
-                GDPR, CCPA, and India&apos;s DPDP Act &mdash; so every visitor&apos;s consent is
+                GDPR, CCPA, and India&apos;s DPDP Act - so every visitor&apos;s consent is
                 logged and defensible.
               </p>
               <a href="/cookie-compliance" className="card-link" style={{ color: "var(--secondary)" }}>
-                Explore Cookie Compliance <Icon name="ArrowRight" />
+                Explore EU Compliance <Icon name="ArrowRight" />
               </a>
             </div>
             <div className="card">
               <div className="icon-tile">
                 <Icon name="Boxes" />
               </div>
-              <h3>Architecture Diagram Services</h3>
+              <h3>Virtual CISO Services</h3>
               <p>
-                Cloud, system, network and data-flow diagrams built by senior architects &mdash;
-                C4 model, AWS/Azure/GCP-ready, and kept current as your systems evolve.
+                Fractional security leadership from senior practitioners - architecture
+                &amp; design, risk scoping, and continuous review &amp; compliance across your
+                environment.
               </p>
               <a href="/architecture-diagrams" className="card-link">
-                Explore Diagrams <Icon name="ArrowRight" />
+                Explore vCISO Services <Icon name="ArrowRight" />
               </a>
             </div>
           </div>
@@ -179,26 +180,26 @@ export default function HomePage() {
               <Eyebrow>Why Relynt</Eyebrow>
               <h2>Built for teams who can&apos;t afford to guess.</h2>
               <p className="lead">
-                Compliance and trust aren&apos;t checkboxes &mdash; they&apos;re infrastructure.
+                Compliance and trust aren&apos;t checkboxes - they&apos;re infrastructure.
                 We built Relynt so your HR, legal, and engineering teams get accurate answers
                 fast, with an audit trail behind every one.
               </p>
               <CheckList
                 items={[
                   <>
-                    <strong>Fast, not reckless</strong> &mdash; automated checks paired with
+                    <strong>Fast, not reckless</strong> - automated checks paired with
                     manual review on every flagged case.
                   </>,
                   <>
-                    <strong>Compliance-first</strong> &mdash; every workflow mapped to the
+                    <strong>Compliance-first</strong> - every workflow mapped to the
                     regulation that governs it.
                   </>,
                   <>
-                    <strong>Transparent pricing</strong> &mdash; know your cost per check, per
+                    <strong>Transparent pricing</strong> - know your cost per check, per
                     banner, per diagram upfront.
                   </>,
                   <>
-                    <strong>Dedicated specialists</strong> &mdash; a named point of contact, not
+                    <strong>Dedicated specialists</strong> - a named point of contact, not
                     a ticket queue.
                   </>,
                 ]}
@@ -250,7 +251,7 @@ export default function HomePage() {
               {
                 num: 1,
                 title: "Tell us what you need",
-                text: "Pick a service &mdash; BGV, cookie compliance, or architecture diagrams &mdash; and share your requirements through a short form or call.",
+                text: "Pick a service - BGV, cookie compliance, or architecture diagrams - and share your requirements through a short form or call.",
               },
               {
                 num: 2,
@@ -260,12 +261,12 @@ export default function HomePage() {
               {
                 num: 3,
                 title: "We do the work",
-                text: "Automated tooling plus human review handles verification, scanning, or drafting &mdash; with progress visible throughout.",
+                text: "Automated tooling plus human review handles verification, scanning, or drafting - with progress visible throughout.",
               },
               {
                 num: 4,
                 title: "You get a clear deliverable",
-                text: "A report, a live compliant banner, or a polished diagram set &mdash; documented, versioned, and ready to act on.",
+                text: "A report, a live compliant banner, or a polished diagram set - documented, versioned, and ready to act on.",
               },
             ]}
           />
@@ -293,7 +294,7 @@ export default function HomePage() {
             <div className="quote-card">
               <div className="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
               <p>
-                &quot;The cookie compliance rollout was painless &mdash; DPDP-ready banners live
+                &quot;The cookie compliance rollout was painless - DPDP-ready banners live
                 across 12 domains within a week.&quot;
               </p>
               <div className="quote-author">

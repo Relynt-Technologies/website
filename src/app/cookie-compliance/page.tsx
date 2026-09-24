@@ -38,7 +38,7 @@ export default function CookieCompliancePage() {
               <p className="lead">
                 We audit your site&apos;s tracking footprint, deploy a compliant consent banner,
                 and generate the policies that hold up under GDPR, CCPA and India&apos;s DPDP Act
-                &mdash; so regulators and users both trust what you collect.
+                - so regulators and users both trust what you collect.
               </p>
               <div className="hero-actions">
                 <Link href="/contact" className="btn btn-primary">

@@ -14,7 +14,7 @@ const cards = [
     tag: "Hiring & HR",
     icon: "Shield",
     title: "Background Verification",
-    text: "Employment, education, identity, address, criminal record and reference checks &mdash; delivered in 48&ndash;72 hours with a full audit trail.",
+    text: "Employment, education, identity, address, criminal record and reference checks - delivered in 48&ndash;72 hours with a full audit trail.",
     pills: ["Employment History", "Education Check", "ID Verification", "Criminal Record"],
     cta: { label: "View BGV Plans", href: "/bgv" },
   },
@@ -51,7 +51,7 @@ export default function ServicesPage() {
           </h1>
           <p className="lead" style={{ maxWidth: 640 }}>
             Every Relynt engagement is scoped, priced and delivered by specialists in that
-            domain &mdash; not a generalist account manager. Pick one service or bundle all
+            domain - not a generalist account manager. Pick one service or bundle all
             three.
           </p>
         </div>

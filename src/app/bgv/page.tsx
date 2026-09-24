@@ -36,7 +36,7 @@ export default function BgvPage() {
               <Eyebrow>Background Verification</Eyebrow>
               <h1>Hire with confidence, every time.</h1>
               <p className="lead">
-                Comprehensive employment, education, identity and record checks &mdash;
+                Comprehensive employment, education, identity and record checks -
                 automated where it&apos;s safe to be, and reviewed by a specialist wherever it
                 matters.
               </p>

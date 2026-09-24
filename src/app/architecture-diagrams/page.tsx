@@ -13,7 +13,7 @@ const types = [
   { icon: "Cloud", title: "Cloud Architecture", text: "AWS, Azure and GCP-ready diagrams showing services, regions and data paths." },
   { icon: "Layers", title: "C4 Model Diagrams", text: "Context, container, component and code-level views for engineering onboarding." },
   { icon: "GitBranch", title: "Network Topology", text: "Physical and logical network maps for infra, security and compliance reviews." },
-  { icon: "Boxes", title: "Data Flow Diagrams", text: "Trace how data moves through systems &mdash; ideal for privacy and security audits." },
+  { icon: "Boxes", title: "Data Flow Diagrams", text: "Trace how data moves through systems - ideal for privacy and security audits." },
   { icon: "Users", title: "Sequence Diagrams", text: "Request/response flows across services, APIs and third-party integrations." },
   { icon: "Target", title: "System Design Docs", text: "Full design documentation packages for RFCs, ADRs and technical proposals." },
   { icon: "Pen", title: "Custom Infographics", text: "Investor-deck and stakeholder-ready visuals that simplify without dumbing down." },
@@ -37,7 +37,7 @@ export default function ArchitectureDiagramsPage() {
               <h1>Systems your whole team can actually understand.</h1>
               <p className="lead">
                 Senior architects turn your infrastructure, codebase and data flows into clear,
-                presentation-ready diagrams &mdash; C4 model, cloud-native, and kept current as
+                presentation-ready diagrams - C4 model, cloud-native, and kept current as
                 your systems change.
               </p>
               <div className="hero-actions">
@@ -103,7 +103,7 @@ export default function ArchitectureDiagramsPage() {
           <SectionHead center eyebrow="Process" title="From a call to a finished diagram set" />
           <Steps
             steps={[
-              { num: 1, title: "Share your systems", text: "A walkthrough call, repo access, or existing docs &mdash; whatever you have works." },
+              { num: 1, title: "Share your systems", text: "A walkthrough call, repo access, or existing docs - whatever you have works." },
               { num: 2, title: "Architect review", text: "A senior architect maps components, dependencies and data flows." },
               { num: 3, title: "Draft & iterate", text: "First draft within days, with revision rounds until it's exactly right." },
               { num: 4, title: "Deliver & maintain", text: "Final files in your preferred format, with optional ongoing updates each release." },
@@ -170,7 +170,7 @@ export default function ArchitectureDiagramsPage() {
         <div className="container">
           <CtaBand
             title="Turn tribal knowledge into clear diagrams"
-            text="Send us a repo or a whiteboard photo &mdash; we'll turn it into documentation your team will actually use."
+            text="Send us a repo or a whiteboard photo - we'll turn it into documentation your team will actually use."
             button={{ label: "Request a Diagram", href: "/contact" }}
           />
         </div>

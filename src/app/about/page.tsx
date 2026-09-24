@@ -25,7 +25,7 @@ export default function AboutPage() {
           <p className="lead" style={{ maxWidth: 640 }}>
             Relynt was built on a simple idea: verification, compliance and documentation
             shouldn&apos;t slow you down. They should be a service you trust and forget about
-            &mdash; because it&apos;s always working correctly in the background.
+            - because it&apos;s always working correctly in the background.
           </p>
         </div>
       </section>
@@ -36,8 +36,8 @@ export default function AboutPage() {
             <Eyebrow>Our Story</Eyebrow>
             <h2>Started by people tired of slow, opaque compliance work</h2>
             <p>
-              Relynt began when our founders &mdash; former HR-tech and cloud infrastructure
-              operators &mdash; kept running into the same three walls: background checks that
+              Relynt began when our founders - former HR-tech and cloud infrastructure
+              operators - kept running into the same three walls: background checks that
               took weeks, cookie compliance that lawyers dreaded touching, and architecture
               documentation that was outdated the moment it was published.
             </p>
@@ -112,7 +112,7 @@ export default function AboutPage() {
             <Eyebrow>Leadership</Eyebrow>
             <h2>A small team, deliberately</h2>
             <p className="lead">
-              Each service line is led by a specialist with direct domain experience &mdash; not
+              Each service line is led by a specialist with direct domain experience - not
               a generalist spread across all three.
             </p>
           </div>

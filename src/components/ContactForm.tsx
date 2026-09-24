@@ -53,7 +53,7 @@ export default function ContactForm() {
             className="form-success"
             style={{ padding: 16, background: "var(--secondary-100)", borderRadius: 12, color: "var(--primary-700)", fontWeight: 600, textAlign: "center", display: "block" }}
           >
-            <Icon name="Check" /> Thanks! This is a demo form &mdash; wire it up to your email
+            <Icon name="Check" /> Thanks! This is a demo form - wire it up to your email
             or CRM to start receiving messages.
           </div>
         )}
