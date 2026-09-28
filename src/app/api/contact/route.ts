@@ -37,17 +37,35 @@ export async function POST(request: Request) {
     await Promise.all([
       brevo.transactionalEmails.sendTransacEmail({
         subject: "Thanks for reaching out to Relynt",
-        htmlContent: `
-          <p>Hi ${escapeHtml(name)},</p>
-          <p>Thanks for contacting Relynt. We've received your inquiry${company ? ` for ${escapeHtml(company)}` : ""} and a specialist will get back to you within one business day.</p>
-          ${service ? `<p><strong>Service needed:</strong> ${escapeHtml(service)}</p>` : ""}
-          ${message ? `<p><strong>Your message:</strong><br/>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>` : ""}
-          <p>— The Relynt team</p>
-        `,
+        htmlContent: renderBrandEmail({
+          title: "Thanks for reaching out",
+          contentHtml: `
+            <p style="color:#0f172a;font-size:16px;margin:0 0 16px;">Hi ${escapeHtml(name)},</p>
+            <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px;">
+              Thanks for contacting Relynt. We've received your inquiry${company ? ` for <strong>${escapeHtml(company)}</strong>` : ""} and a specialist will reach out within one business day.
+            </p>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin:0 0 28px;">
+              <p style="color:#166534;font-size:13px;margin:0;font-weight:500;">
+                ✓ A specialist will review your requirements<br>
+                ✓ We'll confirm scope and turnaround time<br>
+                ✓ You'll hear from us within one business day
+              </p>
+            </div>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center">
+                  <a href="${BASE_URL}/services" style="display:inline-block;background:#063840;color:#ffffff;text-decoration:none;padding:14px 36px;border-radius:8px;font-weight:600;font-size:15px;letter-spacing:0.3px;">
+                    Explore Our Services →
+                  </a>
+                </td>
+              </tr>
+            </table>
+          `,
+        }),
         textContent: `
           Hi ${name},
 
-          Thanks for contacting Relynt. We've received your inquiry${company ? ` for ${company}` : ""} and a specialist will get back to you within one business day.
+          Thanks for contacting Relynt. We've received your inquiry${company ? ` for ${company}` : ""} and a specialist will reach out within one business day.
 
           Service needed: ${service || "Not specified"}
           Your message: ${message || "—"}
@@ -59,16 +77,49 @@ export async function POST(request: Request) {
       }),
       brevo.transactionalEmails.sendTransacEmail({
         subject: `New lead: ${name} (${company || "no company"})`,
-        htmlContent: `
-          <h3>New contact form submission</h3>
-          <table cellpadding="6" cellspacing="0" style="border-collapse:collapse">
-            <tr><td><strong>Name</strong></td><td>${escapeHtml(name)}</td></tr>
-            <tr><td><strong>Email</strong></td><td>${escapeHtml(email)}</td></tr>
-            <tr><td><strong>Company</strong></td><td>${escapeHtml(company) || "—"}</td></tr>
-            <tr><td><strong>Service</strong></td><td>${escapeHtml(service) || "Not sure yet"}</td></tr>
-            <tr><td><strong>Message</strong></td><td>${escapeHtml(message).replace(/\n/g, "<br/>") || "—"}</td></tr>
-          </table>
-        `,
+        htmlContent: renderBrandEmail({
+          title: "New contact form submission",
+          contentHtml: `
+            <p style="color:#0f172a;font-size:16px;margin:0 0 16px;">Hi Relynt team,</p>
+            <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px;">
+              A new inquiry just came in through the contact form.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin:0 0 28px;">
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Name</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(name)}</td>
+              </tr>
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Email</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(email)}</td>
+              </tr>
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Company</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(company) || "—"}</td>
+              </tr>
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Service</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(service) || "Not sure yet"}</td>
+              </tr>
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;">Message</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;">${escapeHtml(message).replace(/\n/g, "<br/>") || "—"}</td>
+              </tr>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center">
+                  <a href="mailto:${escapeHtml(email)}" style="display:inline-block;background:#063840;color:#ffffff;text-decoration:none;padding:14px 36px;border-radius:8px;font-weight:600;font-size:15px;letter-spacing:0.3px;">
+                    Reply to ${escapeHtml(name)} →
+                  </a>
+                </td>
+              </tr>
+            </table>
+            <p style="color:#94a3b8;font-size:12px;margin:24px 0 0;text-align:center;">
+              Lead email: <span style="color:#063840;">${escapeHtml(email)}</span>
+            </p>
+          `,
+        }),
         textContent: `
           New contact form submission:
           Name: ${name}
@@ -90,6 +141,54 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+const BASE_URL = "https://relynt.dev";
+
+function renderBrandEmail(opts: { title: string; contentHtml: string }) {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${opts.title} - relynt</title>
+</head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:Inter,system-ui,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
+          <tr>
+            <td style="background:#063840;padding:32px 40px;">
+              <table width="100%">
+                <tr>
+                  <td>
+                    <div style="color:#6FC2CB;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">relynt</div>
+                    <div style="color:#ffffff;font-size:22px;font-weight:700;">${opts.title}</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:40px;">
+              ${opts.contentHtml}
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#f8fafc;padding:20px 40px;border-top:1px solid #e2e8f0;">
+              <p style="color:#94a3b8;font-size:12px;margin:0;text-align:center;">
+                Powered by <strong style="color:#063840;">relynt</strong> · Secure Background Verification
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 }
 
 function escapeHtml(value: string) {
