@@ -15,15 +15,16 @@ const infoCards: { icon: IconName; title: string; lines: string[] }[] = [
     icon: "Mail",
     title: "Email",
     lines: [
-      "hello@relynt.io",
-      "support@relynt.io",
+      "hello@relyntai.com",
+      "support@relyntai.com",
     ] as string[],
   },
   {
     icon: "Phone",
     title: "Phone",
     lines: [
-      "+91 80 4567 1234",
+      "+91 9113206642",
+      "+91 9585254515",
       "Mon–Fri, 9am–7pm IST",
     ] as string[],
   },

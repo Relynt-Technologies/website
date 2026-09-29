@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 
-const baseUrl = "https://relynt.dev";
+const baseUrl = "https://relyntai.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

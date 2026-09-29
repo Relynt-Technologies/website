@@ -1,3 +1,5 @@
+import { readFile } from "fs/promises";
+import { join } from "path";
 import { NextResponse } from "next/server";
 import { BrevoClient } from "@getbrevo/brevo";
 
@@ -7,10 +9,32 @@ const brevo = new BrevoClient({
 
 const SENDER = {
   name: "Relynt",
-  email: process.env.BREVO_SENDER_EMAIL || "no-reply@relynt.dev",
+  email: process.env.BREVO_SENDER_EMAIL || "no-reply@relyntai.com",
 };
 
-const NOTIFY_EMAIL = "hello@relyntai.com";
+const NOTIFY_EMAILS = ["hello@relyntai.com", "support@relyntai.com"];
+
+const LOGO_FILENAME = "relynt_logo_for_dark_bg.png";
+const LOGO_CID = `cid:${LOGO_FILENAME}`;
+// 1918x615 source, rendered at the same 40px height the site header uses.
+const LOGO_WIDTH = 125;
+const LOGO_HEIGHT = 40;
+
+let logoBase64: Promise<string | null> | null = null;
+
+// Embedded as an inline CID image rather than a remote URL so the logo still
+// renders in clients that block external images (Gmail, Outlook by default).
+function getLogoBase64() {
+  if (!logoBase64) {
+    logoBase64 = readFile(join(process.cwd(), "public", "logo", LOGO_FILENAME))
+      .then((buffer) => buffer.toString("base64"))
+      .catch((error) => {
+        console.error("Failed to load email logo:", error);
+        return null;
+      });
+  }
+  return logoBase64;
+}
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
@@ -22,6 +46,7 @@ export async function POST(request: Request) {
 
   const name = String(body.name || "").trim();
   const email = String(body.email || "").trim();
+  const phone = String(body.phone || "").trim();
   const company = String(body.company || "").trim();
   const service = String(body.service || "").trim();
   const message = String(body.message || "").trim();
@@ -33,12 +58,20 @@ export async function POST(request: Request) {
     );
   }
 
+  const logo = await getLogoBase64();
+  const logoSrc = logo ? LOGO_CID : null;
+  const logoAttachment = logo
+    ? [{ name: LOGO_FILENAME, content: logo }]
+    : undefined;
+
   try {
     await Promise.all([
       brevo.transactionalEmails.sendTransacEmail({
         subject: "Thanks for reaching out to Relynt",
+        attachment: logoAttachment,
         htmlContent: renderBrandEmail({
           title: "Thanks for reaching out",
+          logoSrc,
           contentHtml: `
             <p style="color:#0f172a;font-size:16px;margin:0 0 16px;">Hi ${escapeHtml(name)},</p>
             <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px;">
@@ -68,6 +101,7 @@ export async function POST(request: Request) {
           Thanks for contacting Relynt. We've received your inquiry${company ? ` for ${company}` : ""} and a specialist will reach out within one business day.
 
           Service needed: ${service || "Not specified"}
+          Phone: ${phone || "—"}
           Your message: ${message || "—"}
 
           — The Relynt team
@@ -77,8 +111,10 @@ export async function POST(request: Request) {
       }),
       brevo.transactionalEmails.sendTransacEmail({
         subject: `New lead: ${name} (${company || "no company"})`,
+        attachment: logoAttachment,
         htmlContent: renderBrandEmail({
           title: "New contact form submission",
+          logoSrc,
           contentHtml: `
             <p style="color:#0f172a;font-size:16px;margin:0 0 16px;">Hi Relynt team,</p>
             <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px;">
@@ -96,6 +132,10 @@ export async function POST(request: Request) {
               <tr>
                 <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Company</td>
                 <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(company) || "—"}</td>
+              </tr>
+              <tr>
+                <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Phone</td>
+                <td style="padding:10px 16px;font-size:14px;color:#0f172a;border-bottom:1px solid #e2e8f0;">${escapeHtml(phone) || "—"}</td>
               </tr>
               <tr>
                 <td style="background:#f8fafc;padding:10px 16px;font-weight:600;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0;">Service</td>
@@ -124,12 +164,13 @@ export async function POST(request: Request) {
           New contact form submission:
           Name: ${name}
           Email: ${email}
+          Phone: ${phone || "—"}
           Company: ${company || "—"}
           Service: ${service || "Not sure yet"}
           Message: ${message || "—"}
         `,
         sender: SENDER,
-        to: [{ email: NOTIFY_EMAIL }],
+        to: NOTIFY_EMAILS.map((address) => ({ email: address })),
       }),
     ]);
 
@@ -143,9 +184,17 @@ export async function POST(request: Request) {
   }
 }
 
-const BASE_URL = "https://relynt.dev";
+const BASE_URL = "https://relyntai.com";
 
-function renderBrandEmail(opts: { title: string; contentHtml: string }) {
+function renderBrandEmail(opts: {
+  title: string;
+  contentHtml: string;
+  logoSrc: string | null;
+}) {
+  const logo = opts.logoSrc
+    ? `<img src="${opts.logoSrc}" alt="Relynt" width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block;border:0;width:${LOGO_WIDTH}px;height:${LOGO_HEIGHT}px;">`
+    : "";
+
   return `
 <!DOCTYPE html>
 <html>
@@ -161,11 +210,15 @@ function renderBrandEmail(opts: { title: string; contentHtml: string }) {
         <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
           <tr>
             <td style="background:#063840;padding:32px 40px;">
-              <table width="100%">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
-                  <td>
-                    <div style="color:#6FC2CB;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">relynt</div>
-                    <div style="color:#ffffff;font-size:22px;font-weight:700;">${opts.title}</div>
+                  <td style="padding:0;">
+                    ${logo}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:${logo ? "20px" : "0"} 0 0 0;">
+                    <div style="color:#ffffff;font-size:22px;font-weight:700;line-height:1.3;">${opts.title}</div>
                   </td>
                 </tr>
               </table>

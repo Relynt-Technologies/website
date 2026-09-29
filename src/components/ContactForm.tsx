@@ -21,6 +21,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           name: data.get("name"),
           email: data.get("email"),
+          phone: data.get("phone"),
           company: data.get("company"),
           service: data.get("service"),
           message: data.get("message"),
@@ -50,18 +51,22 @@ export default function ContactForm() {
         </div>
         <div className="form-row">
           <div className="field">
+            <label htmlFor="fphone">Phone Number</label>
+            <input id="fphone" name="phone" type="tel" placeholder="+1 555 000 0000" />
+          </div>
+          <div className="field">
             <label htmlFor="fcompany">Company</label>
             <input id="fcompany" name="company" type="text" placeholder="Company Pvt. Ltd." />
           </div>
-          <div className="field">
-            <label htmlFor="fservice">Service Needed</label>
-            <select id="fservice" name="service">
-              <option>Background Verification</option>
-              <option>Cookie &amp; Consent Compliance</option>
-              <option>Architecture Diagram Services</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
+        </div>
+        <div className="field full" style={{ marginBottom: 18 }}>
+          <label htmlFor="fservice">Service Needed</label>
+          <select id="fservice" name="service">
+            <option>Background Verification</option>
+            <option>Cookie &amp; Consent Compliance</option>
+            <option>Architecture Diagram Services</option>
+            <option>Not sure yet</option>
+          </select>
         </div>
         <div className="field full" style={{ marginBottom: 18 }}>
           <label htmlFor="fmessage">Message</label>
